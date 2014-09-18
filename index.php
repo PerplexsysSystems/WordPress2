@@ -26,6 +26,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery.quickflip.min.js"></script>
   </head>
   <body>
       <div class="container">
@@ -104,10 +105,125 @@
                   </nav>
               </div>
           </div>
+          <div class="row" style="margin-top:20px;">
           <!--slider-->
+              <div id="slide1img" class="pull-left" style="height:420px; background-color: #fff;">
+                  <img src="images/slide-1.jpg"/>
+              </div>
+              <div id="slide1info" class="pull-right" style="width: 370px; height: 420px; padding-top: 51px; padding-left:31px; padding-right: 30px; background-color: white;">
+
+                <h4 style="height: 24px;"><i class="fa fa-arrow-circle-right" style="color:#e5e5e5; font-size:24px; line-height: 24px; margin-right: 9px;"></i>good Start1</h4>
+                <h2>Smart &amp; Simple</h2>
+                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum.
+                Duis sedt nibh vulputate cursus a sit.</p>
+                <a href="#" class="btn btn-primary btn-large">Read More</a> 
+              </div>
           
+              <div id="slide2img" class="pull-left" style="height:420px; background-color: #fff; display: none;">
+                  <img src="images/slide-2.jpg"/>
+              </div>
+              <div id="slide2info" class="pull-right" style="width: 370px; height: 420px; padding-top: 51px; padding-left:31px; padding-right: 30px; background-color: white; display: none;">
+
+                <h4 style="height: 24px;"><i class="fa fa-arrow-circle-right" style="color:#e5e5e5; font-size:24px; line-height: 24px; margin-right: 9px;"></i>good Start2</h4>
+                <h2>Smart &amp; Simple</h2>
+                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum.
+                Duis sedt nibh vulputate cursus a sit.</p>
+                <a href="#" class="btn btn-primary btn-large">Read More</a> 
+              </div>
+          
+              <div id="slide3img" class="pull-left" style="height:420px; background-color: #fff; display: none;">
+                  <img src="images/slide-3.jpg"/>
+              </div>
+              <div id="slide3info" class="pull-right" style="width: 370px; height: 420px; padding-top: 51px; padding-left:31px; padding-right: 30px; background-color: white; display: none;">
+
+                <h4 style="height: 24px;"><i class="fa fa-arrow-circle-right" style="color:#e5e5e5; font-size:24px; line-height: 24px; margin-right: 9px;"></i>good Start 3</h4>
+                <h2>Smart &amp; Simple</h2>
+                <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum.
+                Duis sedt nibh vulputate cursus a sit.</p>
+                <a href="#" class="btn btn-primary btn-large">Read More</a> 
+              </div>
+            <script>
+                $slideID=1;
+                function NextSlide()
+                {
+                    switch($slideID)
+                    {
+                        case 1:
+                            $('#slide1img').fadeOut(600, function(){$('#slide2img').fadeIn();});        
+                            $('#slide1info').fadeOut(900, function(){$('#slide2info').fadeIn();});
+                            
+                            $slideID=2;
+                            break;
+                       case 2:
+                            $('#slide2img').fadeOut(600, function(){$('#slide3img').fadeIn();});        
+                            $('#slide2info').fadeOut(900, function(){$('#slide3info').fadeIn();});
+                            $slideID=3;
+                            break;
+                       case 3:
+                            $('#slide3img').fadeOut(600, function(){$('#slide1img').fadeIn();});        
+                            $('#slide3info').fadeOut(900, function(){$('#slide1info').fadeIn();});
+                            $slideID=1;
+                            break;
+                    }
+                }
+                
+                $(document).ready(function(){
+                   window.setInterval(NextSlide, 5000);
+                });
+            </script>
+        </div>
+          <div class="row" style="margin-top: 20px; color:#fff;">
+              <div style="width:370px; float:left; background-color: #35bc7a; padding: 27px 30px 30px 32px; height:328px;">
+                  <span class="fa fa-leaf fa-5x"></span>
+                  <div>
+                      <h2>Creative Solutions</h2>
+                      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh.</p>
+                  </div>
+                  <a href="#" class="pull-right" style="color:#fff; text-decoration: none;"><span class="fa fa-arrow-circle-right fa-3x"></span></a>
+              </div>
+              <div style="width:370px; float:left; margin-left: 30px; background-color: #f86924; padding: 27px 30px 30px 32px; height:328px;">
+                  <span class="fa fa-gears fa-5x"></span>
+                  <div>
+                      <h2>Featured Service</h2>
+                      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh.</p>
+                  </div>
+                  <a href="#" class="pull-right" style="color:#fff; text-decoration: none;"><span class="fa fa-arrow-circle-right fa-3x"></span></a>
+              </div>
+              <div style="width:370px; float:left; margin-left: 30px; background-color: #ff9f00; padding: 27px 30px 30px 32px; height:328px;">
+                  <span class="fa fa-comments-o fa-5x"></span>
+                  <div>
+                      <h2>Technical Support</h2>
+                      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh.</p>
+                  </div>
+                  <a href="#" class="pull-right" style="color:#fff; text-decoration: none;"><span class="fa fa-arrow-circle-right fa-3x"></span></a>
+              </div>
+          </div>
+          <div class="row" style="margin-top:20px; background-color: #fff;">
+              <div class="contentbox" style="background-color: #fff; padding:16px 30px 32px;">
+                    <h2 style="font-weight: 300; margin-bottom: 20px;">Latest Projects</h2>
+                    <ul style="list-style: none; margin:0px; padding: 0px;">
+                        <li style="display:inline;">
+                            <div class="quickflip-wrapper">
+                                <div><img src="images/project-1-264x248.jpg"/></div>
+                                <div>Rear panel</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <script>
+                        $(document).ready(function(){
+                           $(function() {
+                                $('.quickflip-wrapper').quickFlip();
+                            }); 
+                            $('.quickflip-wrapper').mouseenter(function(){
+                                $('.quickflip-wrapper').quickFlipper();
+                            });
+                        });
+                    </script>
+              </div>
+              
+          </div>
       </div>
-      
+        
     
   </body>
 </html>
