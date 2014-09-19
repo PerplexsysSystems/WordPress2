@@ -78,3 +78,144 @@ body{
     margin-left:20px;
     width:140px;
 }
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000;
+}
+	/* flip the pane when hovered */
+	.flip-container:hover .flipper, .flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 247px;
+	height: 255px;
+        margin-right: 30px;
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+	transform: rotateY(180deg);
+}
+
+.front h5 {
+    background-color: #ff9f00;
+    bottom: 100px;
+    color: #ffffff;
+    left: 0;
+    margin: 0;
+    padding: 5px 11px 7px;
+    position: absolute;
+    z-index: 3;
+}
+
+
+.content_box.alt {
+    min-height: 320px;
+    padding: 34px 20px 0 400px;
+}
+
+.content_box {
+    background-color: #ffffff;
+    background-position: 30px 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    padding: 16px 30px 32px;
+}
+
+.recent-posts.skills {
+    margin: 0 !important;
+    overflow: hidden;
+}
+ul.unstyled, ol.unstyled {
+    list-style: none outside none;
+    margin-left: 0;
+}
+.recent-posts {
+    border: medium none;
+    margin: 0 0 0 -20px !important;
+    overflow: hidden;
+    padding: 0;
+}
+
+.recent-posts.skills li:before {
+    border-radius: 38px;
+    border-style: solid;
+    border-width: 2px;
+    float: left;
+    font-size: 24px;
+    height: 38px;
+    line-height: 38px;
+    margin: 0 18px 10px 0;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    width: 38px;
+}
+
+.recent-posts.skills li {
+    margin: 0 72px 31px 0;
+    width: 270px;
+}
+.recent-posts_li {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    list-style-type: none;
+    margin: 0 0 20px 20px;
+    padding: 0;
+    display:inline-block;
+}
+
+.recent-posts.skills li.green h5 a {
+    color: #35bc7a;
+}
+.recent-posts.skills li.blue h5 a {
+    color: #1e8bc3;
+}
+.recent-posts.skills li.red h5 a {
+    color: #f86924;
+}
+.recent-posts.skills li.orange h5 a {
+    color: #ff9f00;
+}
+
+.recent-posts.skills li.green:before {
+    border-color: #35bc7a;
+    color: #35bc7a;
+}
+.recent-posts.skills li.blue:before {
+    border-color: #1e8bc3;
+    color: #1e8bc3;
+}
+.recent-posts.skills li.red:before {
+    border-color: #f86924;
+    color: #f86924;
+}
+.recent-posts.skills li.orange:before {
+    border-color: #ff9f00;
+    color: #ff9f00;
+}

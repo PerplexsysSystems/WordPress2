@@ -27,6 +27,8 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery.quickflip.min.js"></script>
+    <script type="text/javascript" src="js/rotate3Di.js"></script>
+    <script type="text/javascript" src="js/jquery-css-transform.js"></script>
   </head>
   <body>
       <div class="container">
@@ -199,28 +201,156 @@
               </div>
           </div>
           <div class="row" style="margin-top:20px; background-color: #fff;">
+              
               <div class="contentbox" style="background-color: #fff; padding:16px 30px 32px;">
                     <h2 style="font-weight: 300; margin-bottom: 20px;">Latest Projects</h2>
-                    <ul style="list-style: none; margin:0px; padding: 0px;">
-                        <li style="display:inline;">
-                            <div class="quickflip-wrapper">
-                                <div><img src="images/project-1-264x248.jpg"/></div>
-                                <div>Rear panel</div>
+                    <ul id="projectlist" style="list-style: none; margin:0px; padding: 0px;">
+                        <li style="float:left;">                            
+                            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                    <div class="flipper">
+                                            <div class="front">
+                                                <h5>Image Format</h5>
+                                                <figure class="featured-thumbnail thumbnail">
+                                                    <img src="images/project-1-264x248.jpg" alt="Image Format">
+                                                </figure>
+                                            </div>
+                                        <div class="back">
+                                            <div class="inner">
+                                                <h5>Image Format</h5>
+                                                <div class="post_meta">
+                                                    <span class="post_date">
+                                                        <time datetime="2012-07-23T15:00:01">23 July, 2012</time>
+                                                    </span>
+                                                </div>
+                                                <p class="excerpt">This format perfectly fits in case you need only a single image for your post display. Use Featured image option to add image to the post. Pellentesque habitant... </p><a href="http://livedemo00.template-help.com/wordpress_44910/portfolio-view/image-format/" class="btn btn-primary" title="Image Format">read more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </li>
+                        <li style="float:left;">                            
+                            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                    <div class="flipper">
+                                            <div class="front">
+                                                <h5>Image Format</h5>
+                                                <figure class="featured-thumbnail thumbnail">
+                                                    <img src="images/project-2-264x248.jpg" alt="Image Format">
+                                                </figure>
+                                            </div>
+                                        <div class="back">
+                                            <div class="inner">
+                                                <h5>Image Format</h5>
+                                                <div class="post_meta">
+                                                    <span class="post_date">
+                                                        <time datetime="2012-07-23T15:00:01">23 July, 2012</time>
+                                                    </span>
+                                                </div>
+                                                <p class="excerpt">This format perfectly fits in case you need only a single image for your post display. Use Featured image option to add image to the post. Pellentesque habitant... </p><a href="http://livedemo00.template-help.com/wordpress_44910/portfolio-view/image-format/" class="btn btn-primary" title="Image Format">read more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </li>
+                        <li style="float:left;">                            
+                            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                    <div class="flipper">
+                                            <div class="front">
+                                                <h5>Image Format</h5>
+                                                <figure class="featured-thumbnail thumbnail">
+                                                    <img src="images/project-3-264x248.jpg" alt="Image Format">
+                                                </figure>
+                                            </div>
+                                        <div class="back">
+                                            <div class="inner">
+                                                <h5>Image Format</h5>
+                                                <div class="post_meta">
+                                                    <span class="post_date">
+                                                        <time datetime="2012-07-23T15:00:01">23 July, 2012</time>
+                                                    </span>
+                                                </div>
+                                                <p class="excerpt">This format perfectly fits in case you need only a single image for your post display. Use Featured image option to add image to the post. Pellentesque habitant... </p><a href="http://livedemo00.template-help.com/wordpress_44910/portfolio-view/image-format/" class="btn btn-primary" title="Image Format">read more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </li>
+                        <li style="float:left;">                            
+                            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                    <div class="flipper">
+                                            <div class="front">
+                                                <h5>Image Format</h5>
+                                                <figure class="featured-thumbnail thumbnail">
+                                                    <img src="images/project-4-264x248.jpg" alt="Image Format">
+                                                </figure>
+                                            </div>
+                                        <div class="back">
+                                            <div class="inner">
+                                                <h5>Image Format</h5>
+                                                <div class="post_meta">
+                                                    <span class="post_date">
+                                                        <time datetime="2012-07-23T15:00:01">23 July, 2012</time>
+                                                    </span>
+                                                </div>
+                                                <p class="excerpt">This format perfectly fits in case you need only a single image for your post display. Use Featured image option to add image to the post. Pellentesque habitant... </p><a href="http://livedemo00.template-help.com/wordpress_44910/portfolio-view/image-format/" class="btn btn-primary" title="Image Format">read more</a>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
                         </li>
                     </ul>
-                    <script>
-                        $(document).ready(function(){
-                           $(function() {
-                                $('.quickflip-wrapper').quickFlip();
-                            }); 
-                            $('.quickflip-wrapper').mouseenter(function(){
-                                $('.quickflip-wrapper').quickFlipper();
-                            });
-                        });
-                    </script>
               </div>
               
+          </div>
+          <div class="row" style="margin-top:20px;">
+              <div style="background-image:url(images/img.jpg)" class="content_box alt">
+                <h2>Professional Management Skills</h2>
+                <ul class="recent-posts skills unstyled">
+                    <li class="recent-posts_li green fa fa-cloud-download">
+                        <h5 style="font-size: 18px;">
+                            <a title="Lorem ipsum dolor sit" href="http://livedemo00.template-help.com/wordpress_44910/skills-view/lorem-ipsum-dolor-sit/">Lorem ipsum dolor sit</a>
+                        </h5>
+                        <div class="excerpt">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae dui ligula.
+                        </div>
+                        <div class="clear">
+                            
+                        </div>
+                    </li> 
+                    <li class="recent-posts_li blue fa fa-flask">
+                        <h5 style="font-size: 18px;">
+                            <a title="Etiam eget porttitor enim" href="http://livedemo00.template-help.com/wordpress_44910/skills-view/etiam-eget-porttitor-enim/">Etiam eget porttitor enim</a>
+                        </h5>
+                        <div class="excerpt">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae dui ligula.
+                        </div>
+                        <div class="clear">
+                            
+                        </div>
+                    </li> 
+                    <li class="recent-posts_li red fa fa-flag-o">
+                        <h5 style="font-size: 18px;">
+                            <a title="Fusce egestas ultricies" href="http://livedemo00.template-help.com/wordpress_44910/skills-view/fusce-egestas-ultricies/">Fusce egestas ultricies</a>
+                        </h5>
+                        <div class="excerpt">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae dui ligula.
+                        </div>
+                        <div class="clear">
+                            
+                        </div>
+                    </li> 
+                    <li class="recent-posts_li orange nomargin fa fa-lightbulb-o">
+                        <h5 style="font-size: 18px;">
+                            <a title="Donec convallis arcu id lectus" href="http://livedemo00.template-help.com/wordpress_44910/skills-view/donec-convallis-arcu-id-lectus/">Donec convallis arcu id lectus</a>
+                        </h5>
+                        <div class="excerpt">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae dui ligula.
+                        </div>
+                        <div class="clear">
+                            
+                        </div>
+                    </li> 
+                </ul> 
+              </div>
           </div>
       </div>
         
