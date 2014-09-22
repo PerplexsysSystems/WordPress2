@@ -7,7 +7,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title><?php echo get_bloginfo('name');?></title>
+    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/images/favicon.ico" type="image/x-icon"/>
     
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
@@ -49,7 +51,7 @@
                         <span><span class="fa fa-envelope fa-lg fabutton"></span><a href="mailto:<?php echo $options['supportemail'];?>"><?php echo $options['supportemail'];?></a></span>
                     </li>
                     <li style="display:inline; margin-left: 15px;" class="pull-right">
-                        <span class="pull-right"><i><?php echo $options['tagline'];?></i></span>
+                        <span class="pull-right"><i><?php echo get_bloginfo('description');?></i></span>
                     </li>
                 </ul>
                   

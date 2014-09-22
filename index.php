@@ -68,7 +68,80 @@
           </div>
           <div class="row" style="margin-top:20px;">
           <!--slider-->
-              <div id="slide1img" class="pull-left" style="height:420px; background-color: #fff;">
+          <?php
+        $args = array('category' => 9 );
+
+                            $myposts = get_posts( $args );
+                            $maxcounter=0;
+                            $counter=0;
+                            $scripts='';
+                            foreach ( $myposts as $post ) : setup_postdata( $post );
+                                $maxcounter = $maxcounter + 1;
+                            endforeach; 
+                            wp_reset_postdata();
+                            
+                            foreach ( $myposts as $post ) : setup_postdata( $post );
+                            $title = $post->post_title;
+                            if(strlen($title) > 27)
+                            {
+                                $title = substr($title,0,27).' ...';
+                            }
+                            $date = date('M d,Y',strtotime($post->post_modified));
+                            $id = get_the_ID();
+                            $subtitle = get_post_custom_values('Slider - Sub Title');
+                            $excerpt = $post->post_excerpt;
+                            $visibility = 'display: block;';
+                            if($counter > 0)
+                            {
+                                $visibility = 'display: none;';
+                            }
+                                ?>
+                                    <div id="slide<?php echo $counter;?>-img" class="pull-left" style="height:420px; width: 800px; overflow: hidden; background-color: #fff;<?php echo $visibility;?>">
+                                        <?php
+                                            if(has_post_thumbnail())
+                                            {
+                                                $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+                                                ?>
+                                                <img src="<?php echo $image[0];?>" style="">
+                                                <?php
+                                            }
+                                            else
+                                            {
+                                                ?>
+                                                <img src="<?php echo get_template_directory_uri(); ?>/images/no_image.jpg" style="">    
+                                                <?php
+                                            }
+                                        ?>
+                                    </div>
+                                    <div id="slide<?php echo $counter;?>-info" class="pull-right" style="width: 370px; height: 420px; padding-top: 51px; padding-left:31px; padding-right: 30px; background-color: white;<?php echo $visibility;?>">
+                                        <h4 style="height: 24px;"><i class="fa fa-arrow-circle-right" style="color:#e5e5e5; font-size:24px; line-height: 24px; margin-right: 9px;"></i><?php echo $title;?></h4>
+                                        <h2><?php echo $subtitle[0];?></h2>
+                                        <p><?php echo $excerpt;?></p>
+                                        <a href="<?php echo $post->guid;?>" class="btn btn-primary btn-large">Read More</a>                 
+                                    </div>
+                                <?php
+                                $counter = $counter + 1;
+                                $next_counter = $counter;
+                                $prev_counter = $counter -1;
+                                $slideID = '$slideID=' . $counter;
+                                $l1 = '{';
+                                $l2 = '$';
+                                if($counter == $maxcounter)
+                                {
+                                    $slideID = '$slideID=0';
+                                    $next_counter = '0';
+                                }
+                                $scripts = $scripts . <<<EOF
+case $prev_counter:
+    $('#slide$prev_counter-img').fadeOut(600, function()$l1$('#slide$next_counter-img').fadeIn();});        
+    $('#slide$prev_counter-info').fadeOut(900, function()$l1$('#slide$next_counter-info').fadeIn();});
+
+    $slideID;
+    break;                                      
+EOF;
+                            endforeach; 
+                            wp_reset_postdata();?>
+<!--              <div id="slide1img" class="pull-left" style="height:420px; background-color: #fff;">
                   <img src="<?php echo get_template_directory_uri(); ?>/images/<?php echo $options['slide1img'];?>"/>
               </div>
               <div id="slide1info" class="pull-right" style="width: 370px; height: 420px; padding-top: 51px; padding-left:31px; padding-right: 30px; background-color: white;">
@@ -87,29 +160,30 @@
               </div>
               <div id="slide3info" class="pull-right" style="width: 370px; height: 420px; padding-top: 51px; padding-left:31px; padding-right: 30px; background-color: white; display: none;">
                 <?php echo $options['slide3content'];?>
-              </div>
+              </div>-->
             <script>
-                $slideID=1;
+                $slideID=0;
                 function NextSlide()
                 {
                     switch($slideID)
                     {
-                        case 1:
-                            $('#slide1img').fadeOut(600, function(){$('#slide2img').fadeIn();});        
-                            $('#slide1info').fadeOut(900, function(){$('#slide2info').fadeIn();});
-                            
-                            $slideID=2;
-                            break;
-                       case 2:
-                            $('#slide2img').fadeOut(600, function(){$('#slide3img').fadeIn();});        
-                            $('#slide2info').fadeOut(900, function(){$('#slide3info').fadeIn();});
-                            $slideID=3;
-                            break;
-                       case 3:
-                            $('#slide3img').fadeOut(600, function(){$('#slide1img').fadeIn();});        
-                            $('#slide3info').fadeOut(900, function(){$('#slide1info').fadeIn();});
-                            $slideID=1;
-                            break;
+                        <?php echo $scripts;?>
+//                        case 1:
+//                            $('#slide1img').fadeOut(600, function(){$('#slide2img').fadeIn();});        
+//                            $('#slide1info').fadeOut(900, function(){$('#slide2info').fadeIn();});
+//                            
+//                            $slideID=2;
+//                            break;
+//                       case 2:
+//                            $('#slide2img').fadeOut(600, function(){$('#slide3img').fadeIn();});        
+//                            $('#slide2info').fadeOut(900, function(){$('#slide3info').fadeIn();});
+//                            $slideID=3;
+//                            break;
+//                       case 3:
+//                            $('#slide3img').fadeOut(600, function(){$('#slide1img').fadeIn();});        
+//                            $('#slide3info').fadeOut(900, function(){$('#slide1info').fadeIn();});
+//                            $slideID=1;
+//                            break;
                     }
                 }
                 
@@ -118,126 +192,99 @@
                 });
             </script>
         </div>
-          <div class="row" style="margin-top: 20px; color:#fff;">
-              <div style="width:370px; float:left; background-color: #35bc7a; padding: 27px 30px 30px 32px; height:328px;">
-                  <span class="fa fa-leaf fa-5x"></span>
-                  <div>
-                      <?php echo $options['cta1'];?>
-                  </div>
-                  <a href="#" class="pull-right" style="color:#fff; text-decoration: none;"><span class="fa fa-arrow-circle-right fa-3x"></span></a>
-              </div>
-              <div style="width:370px; float:left; margin-left: 30px; background-color: #f86924; padding: 27px 30px 30px 32px; height:328px;">
-                  <span class="fa fa-gears fa-5x"></span>
-                  <div>
-                      <?php echo $options['cta2'];?>
-                  </div>
-                  <a href="#" class="pull-right" style="color:#fff; text-decoration: none;"><span class="fa fa-arrow-circle-right fa-3x"></span></a>
-              </div>
-              <div style="width:370px; float:left; margin-left: 30px; background-color: #ff9f00; padding: 27px 30px 30px 32px; height:328px;">
-                  <span class="fa fa-comments-o fa-5x"></span>
-                  <div>
-                      <?php echo $options['cta3'];?>
-                  </div>
-                  <a href="#" class="pull-right" style="color:#fff; text-decoration: none;"><span class="fa fa-arrow-circle-right fa-3x"></span></a>
-              </div>
+    <div class="row" style="margin-top: 20px; color:#fff;">
+        <?php
+        $args = array( 'order' => 'ASC', 'posts_per_page' => 3, 'category' => 7 );
+
+                            $myposts = get_posts( $args );
+                            $counter=0;
+                            foreach ( $myposts as $post ) : setup_postdata( $post );
+                            $title = $post->post_title;
+                            if(strlen($title) > 25)
+                            {
+                                $title = substr($title,0,25).' ...';
+                            }
+                            $margin_left = "margin-left: 30px;";
+                            if($counter == 0)
+                            {
+                                $margin_left = '';
+                            }
+                            $date = date('M d,Y',strtotime($post->post_modified));
+                            $id = get_the_ID();
+                            $color = get_post_custom_values('Call To Action - BG Color');
+                            $iconcode = get_post_custom_values('Call To Action - Icon Code');
+                            $excerpt = $post->post_excerpt;
+                                ?>
+                                    <div style="width:370px; float:left; <?php echo $margin_left;?> background-color: <?php echo $color[0];?>; padding: 27px 30px 30px 32px; height:328px;">
+                                        <span class="fa <?php echo $iconcode[0];?> fa-5x"></span>
+                                        <div>
+                                            <h2><?php echo $title;?></h2>
+                                            <p><?php echo $excerpt;?></p>
+                                        </div>
+                                        <a href="<?php echo $post->guid;?>" class="pull-right" style="color:#fff; text-decoration: none;"><span class="fa fa-arrow-circle-right fa-3x"></span></a>
+                                    </div>
+                                <?php
+                                $counter = $counter + 1;
+                            endforeach; 
+                            wp_reset_postdata();?>
+          
           </div>
+    
           <div class="row" style="margin-top:20px; background-color: #fff;">
-              
               <div class="contentbox" style="background-color: #fff; padding:16px 30px 32px;">
                     <h2 style="font-weight: 300; margin-bottom: 20px;">Latest Projects</h2>
                     <ul id="projectlist" style="list-style: none; margin:0px; padding: 0px;">
-                        <li style="float:left;">                            
-                            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                                    <div class="flipper">
-                                            <div class="front">
-                                                <h5>Image Format</h5>
-                                                <figure class="featured-thumbnail thumbnail">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/images/project-1-264x248.jpg" alt="Image Format">
-                                                </figure>
-                                            </div>
-                                        <div class="back">
-                                            <div class="inner">
-                                                <h5>Image Format</h5>
-                                                <div class="post_meta">
-                                                    <span class="post_date">
-                                                        <time datetime="2012-07-23T15:00:01">23 July, 2012</time>
-                                                    </span>
+                        <?php
+                            $args = array( 'posts_per_page' => 4, 'category' => 3 );
+
+                            $myposts = get_posts( $args );
+                            foreach ( $myposts as $post ) : setup_postdata( $post );
+                            $title = $post->post_title;
+                            if(strlen($title) > 25)
+                            {
+                                $title = substr($title,0,25).' ...';
+                            }
+                            $date = date('M d,Y',strtotime($post->post_modified));
+                            $excerpt = $post->post_excerpt;
+                                ?>
+                                    <li style="float:left;">                            
+                                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                                <div class="flipper">
+                                                        <div class="front">
+                                                            <h5><?php echo $title;?></h5>
+                                                            <figure class="featured-thumbnail thumbnail">
+                                                                <?php
+                                                                    if(has_post_thumbnail())
+                                                                    {
+                                                                        the_post_thumbnail();
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        ?>
+                                                                        <img src="<?php echo get_template_directory_uri(); ?>/images/no_image.jpg" alt="Image Format">    
+                                                                        <?php
+                                                                    }
+                                                                ?>
+                                                            </figure>
+                                                        </div>
+                                                    <div class="back">
+                                                        <div class="inner">
+                                                            <h5><?php echo $title;?></h5>
+                                                            <div class="post_meta">
+                                                                <span class="post_date">
+                                                                    <time datetime="<?php echo $date;?>"><?php echo $date;?></time>
+                                                                </span>
+                                                            </div>
+                                                            <p class="excerpt"><?php echo $excerpt;?></p><a href="<?php echo $post->guid;?>" class="btn btn-primary" title="Image Format">read more</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <p class="excerpt">This format perfectly fits in case you need only a single image for your post display. Use Featured image option to add image to the post. Pellentesque habitant... </p><a href="http://livedemo00.template-help.com/wordpress_44910/portfolio-view/image-format/" class="btn btn-primary" title="Image Format">read more</a>
-                                            </div>
                                         </div>
-                                    </div>
-                            </div>
-                        </li>
-                        <li style="float:left;">                            
-                            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                                    <div class="flipper">
-                                            <div class="front">
-                                                <h5>Image Format</h5>
-                                                <figure class="featured-thumbnail thumbnail">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/images/project-2-264x248.jpg" alt="Image Format">
-                                                </figure>
-                                            </div>
-                                        <div class="back">
-                                            <div class="inner">
-                                                <h5>Image Format</h5>
-                                                <div class="post_meta">
-                                                    <span class="post_date">
-                                                        <time datetime="2012-07-23T15:00:01">23 July, 2012</time>
-                                                    </span>
-                                                </div>
-                                                <p class="excerpt">This format perfectly fits in case you need only a single image for your post display. Use Featured image option to add image to the post. Pellentesque habitant... </p><a href="http://livedemo00.template-help.com/wordpress_44910/portfolio-view/image-format/" class="btn btn-primary" title="Image Format">read more</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </li>
-                        <li style="float:left;">                            
-                            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                                    <div class="flipper">
-                                            <div class="front">
-                                                <h5>Image Format</h5>
-                                                <figure class="featured-thumbnail thumbnail">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/images/project-3-264x248.jpg" alt="Image Format">
-                                                </figure>
-                                            </div>
-                                        <div class="back">
-                                            <div class="inner">
-                                                <h5>Image Format</h5>
-                                                <div class="post_meta">
-                                                    <span class="post_date">
-                                                        <time datetime="2012-07-23T15:00:01">23 July, 2012</time>
-                                                    </span>
-                                                </div>
-                                                <p class="excerpt">This format perfectly fits in case you need only a single image for your post display. Use Featured image option to add image to the post. Pellentesque habitant... </p><a href="http://livedemo00.template-help.com/wordpress_44910/portfolio-view/image-format/" class="btn btn-primary" title="Image Format">read more</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </li>
-                        <li style="float:left;">                            
-                            <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                                    <div class="flipper">
-                                            <div class="front">
-                                                <h5>Image Format</h5>
-                                                <figure class="featured-thumbnail thumbnail">
-                                                    <img src="<?php echo get_template_directory_uri(); ?>/images/project-4-264x248.jpg" alt="Image Format">
-                                                </figure>
-                                            </div>
-                                        <div class="back">
-                                            <div class="inner">
-                                                <h5>Image Format</h5>
-                                                <div class="post_meta">
-                                                    <span class="post_date">
-                                                        <time datetime="2012-07-23T15:00:01">23 July, 2012</time>
-                                                    </span>
-                                                </div>
-                                                <p class="excerpt">This format perfectly fits in case you need only a single image for your post display. Use Featured image option to add image to the post. Pellentesque habitant... </p><a href="http://livedemo00.template-help.com/wordpress_44910/portfolio-view/image-format/" class="btn btn-primary" title="Image Format">read more</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                        </li>
+                                    </li>
+                                <?php
+                            endforeach; 
+                            wp_reset_postdata();
+                        ?>
                     </ul>
               </div>
               
@@ -295,87 +342,4 @@
           </div>
           
       </div>
-        <footer style="width:100%;">
-          <div style="background-color: #3c474d;">
-              <div class="container">
-              <div class="row">
-                  <div class="col-lg-3">
-                      <h4 style="color:#fff;">About Us</h4>
-                      <div style="padding-right:26px; color: #b6bcc2; font-size: 13px; line-height: 20px;">
-                          <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate.</p>
-                      </div>
-                  </div>
-                  <div class="col-lg-3">
-                      <h4>Popular Topics</h4>
-                      <div class="tagcloud">
-                          <a href="#">Bibend</a>
-                          <a href="#">Bidendum</a>
-                          <a href="#">Curabitur</a>
-                          <a href="#">Loemips</a>
-                          <a href="#">Lorem</a>
-                          <a href="#">Masa</a>
-                          <a href="#">Neque</a>
-                          <a href="#">Remorem</a>
-                          <a href="#">Tellus</a>
-                      </div>
-                  </div>
-                  <div class="col-lg-3">
-                      <h4>Recent News</h4>
-                      <div>
-                          <ul style="list-style:none;margin:0; padding: 0;">
-                              <li>
-                                  <div class="fa fa-newspaper-o" style="border-color:#fff; color:#fff;border-style: solid; border-radius: 20px; border-width: 0px; height: 20px; width: 20px;line-height: 20px; display:inline-block; padding-left:3px; vertical-align: middle;">
-                                    
-                                  </div>
-                                  <a href="#" style="font-size:13px;margin-left:8px;color:#f86924;">Duis sed odio sit amet nibh vulputate.</a>
-                                  <span style="display:block; margin-left: 38px; font-size: 11px;"><i>Sept. 19, 2014 </i></span>
-                                  <span style="display:block; margin-left: 10px; font-size: 11px;">quis bibendum auctor, nisi elit consequat ipsum...</span>
-                              </li>
-                              <li>
-                                  <div class="fa fa-newspaper-o" style="border-color:#fff; color:#fff;border-style: solid; border-radius: 20px; border-width: 0px; height: 20px; width: 20px;line-height: 20px; display:inline-block; padding-left:3px; vertical-align: middle;">
-                                    
-                                  </div>
-                                  <a href="#" style="font-size:13px;margin-left:8px;color:#f86924;">Duis sed odio sit amet nibh vulputate.</a>
-                                  <span style="display:block; margin-left: 38px; font-size: 11px;"><i>Sept. 19, 2014 </i></span>
-                                  <span style="display:block; margin-left: 10px; font-size: 11px;">quis bibendum auctor, nisi elit consequat ipsum...</span>
-                              </li>
-                              <li>
-                                  <div class="fa fa-newspaper-o" style="border-color:#fff; color:#fff;border-style: solid; border-radius: 20px; border-width: 0px; height: 20px; width: 20px;line-height: 20px; display:inline-block; padding-left:3px; vertical-align: middle;">
-                                    
-                                  </div>
-                                  <a href="#" style="font-size:13px;margin-left:8px;color:#f86924;">Duis sed odio sit amet nibh vulputate.</a>
-                                  <span style="display:block; margin-left: 38px; font-size: 11px;"><i>Sept. 19, 2014 </i></span>
-                                  <span style="display:block; margin-left: 10px; font-size: 11px;">quis bibendum auctor, nisi elit consequat ipsum...</span>
-                              </li>
-                              <li>
-                                  <div class="fa fa-newspaper-o" style="border-color:#fff; color:#fff;border-style: solid; border-radius: 20px; border-width: 0px; height: 20px; width: 20px;line-height: 20px; display:inline-block; padding-left:3px; vertical-align: middle;">
-                                    
-                                  </div>
-                                  <a href="#" style="font-size:13px;margin-left:8px;color:#f86924;">Duis sed odio sit amet nibh vulputate.</a>
-                                  <span style="display:block; margin-left: 38px; font-size: 11px;"><i>Sept. 19, 2014 </i></span>
-                                  <span style="display:block; margin-left: 10px; font-size: 11px;">quis bibendum auctor, nisi elit consequat ipsum...</span>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-lg-3">
-                      <h4>Flickr</h4>
-                      <div>
-                          <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate.</p>
-                      </div>
-                  </div>
-              </div>
-              </div>
-          </div>
-          <div style="background-color: #282f33;">
-              <div class="container">
-                  <div class="row">
-                      <span style="color:#fff; font-size:11px; display:block; margin-top:8px; margin-bottom: 8px;">Perplexsys Systems &copy; 2014 | <a href="#">Privacy Policy</a></span>
-                  </div>
-              </div>
-              
-          </div>
-          </footer>
-    <?php wp_footer(); ?>
-  </body>
-</html>
+        <?php get_footer();?>

@@ -126,12 +126,6 @@ function theme_options_do_page() {
 						<label class="description" for="sample_theme_options[supportemail]"><?php _e( 'Support email address to display in the header', 'metrostyle' ); ?></label>
 					</td>
 				</tr>
-                                <tr valign="top"><th scope="row"><?php _e( 'Tag Line', 'metrostyle' ); ?></th>
-					<td>
-						<input id="sample_theme_options[tagline]" class="regular-text" type="text" name="sample_theme_options[tagline]" value="<?php esc_attr_e( $options['tagline'] ); ?>" />
-						<label class="description" for="sample_theme_options[tagline]"><?php _e( 'Tag Line to display in the header', 'metrostyle' ); ?></label>
-					</td>
-				</tr>
                                 
 				<tr valign="top"><th scope="row"><?php _e( 'Logo Path', 'metrostyle' ); ?></th>
 					<td>
@@ -208,66 +202,15 @@ function theme_options_do_page() {
 						<label class="description" for="sample_theme_options[sometextarea]"><?php _e( 'Sample text box', 'metrostyle' ); ?></label>
 					</td>
 				</tr>-->
-                                <tr valign="top"><th scope="row"><h2>Primary Slider Configuration</h2></th>
+                                <tr valign="top"><th scope="row"><?php _e( 'Footer - About Us', 'metrostyle' ); ?></th>
 					<td>
-                                        <hr/>
-                                    </td>
-                                </tr>
-                                
-                                <tr valign="top"><th scope="row"><?php _e( 'Slide 1 Image Path', 'metrostyle' ); ?></th>
-					<td>
-						<input id="sample_theme_options[slide1img]" class="regular-text" type="text" name="sample_theme_options[slide1img]" value="<?php esc_attr_e( $options['slide1img'] ); ?>" />
-						<label class="description" for="sample_theme_options[slide1img]"><?php _e( 'path relational to /images template directory', 'metrostyle' ); ?></label>
-					</td>
-				</tr>
-                                <tr valign="top"><th scope="row"><?php _e( 'Slide 1 Content', 'metrostyle' ); ?></th>
-					<td>
-						<textarea id="sample_theme_options[slide1content]" class="large-text" cols="50" rows="10" name="sample_theme_options[slide1content]"><?php echo esc_textarea( $options['slide1content'] ); ?></textarea>
-					</td>
-				</tr>
-                                <tr valign="top"><th scope="row"><?php _e( 'Slide 2 Image Path', 'metrostyle' ); ?></th>
-					<td>
-						<input id="sample_theme_options[slide2img]" class="regular-text" type="text" name="sample_theme_options[slide2img]" value="<?php esc_attr_e( $options['slide2img'] ); ?>" />
-						<label class="description" for="sample_theme_options[slide2img]"><?php _e( 'path relational to /images template directory', 'metrostyle' ); ?></label>
-					</td>
-				</tr>
-                                <tr valign="top"><th scope="row"><?php _e( 'Slide 2 Content', 'metrostyle' ); ?></th>
-					<td>
-						<textarea id="sample_theme_options[slide2content]" class="large-text" cols="50" rows="10" name="sample_theme_options[slide2content]"><?php echo esc_textarea( $options['slide2content'] ); ?></textarea>
-					</td>
-				</tr>
-                                <tr valign="top"><th scope="row"><?php _e( 'Slide 3 Image Path', 'metrostyle' ); ?></th>
-					<td>
-						<input id="sample_theme_options[slide3img]" class="regular-text" type="text" name="sample_theme_options[slide3img]" value="<?php esc_attr_e( $options['slide3img'] ); ?>" />
-						<label class="description" for="sample_theme_options[slide3img]"><?php _e( 'path relational to /images template directory', 'metrostyle' ); ?></label>
-					</td>
-				</tr>
-                                <tr valign="top"><th scope="row"><?php _e( 'Slide 3 Content', 'metrostyle' ); ?></th>
-					<td>
-						<textarea id="sample_theme_options[slide3content]" class="large-text" cols="50" rows="10" name="sample_theme_options[slide3content]"><?php echo esc_textarea( $options['slide3content'] ); ?></textarea>
+						<textarea id="sample_theme_options[aboutus]" class="large-text" cols="50" rows="10" name="sample_theme_options[aboutus]"><?php echo esc_textarea( $options['aboutus'] ); ?></textarea>
 					</td>
 				</tr>
                                 
-                                <tr valign="top"><th scope="row"><h2>Call To Actions</h2></th>
-					<td>
-                                        <hr/>
-                                    </td>
-                                </tr>
-                                <tr valign="top"><th scope="row"><?php _e( 'CTA Green Leaf', 'metrostyle' ); ?></th>
-					<td>
-						<textarea id="sample_theme_options[cta1]" class="large-text" cols="50" rows="10" name="sample_theme_options[cta1]"><?php echo esc_textarea( $options['cta1'] ); ?></textarea>
-					</td>
-				</tr>
-                                <tr valign="top"><th scope="row"><?php _e( 'CTA Orange Gears', 'metrostyle' ); ?></th>
-					<td>
-						<textarea id="sample_theme_options[cta2]" class="large-text" cols="50" rows="10" name="sample_theme_options[cta2]"><?php echo esc_textarea( $options['cta2'] ); ?></textarea>
-					</td>
-				</tr>
-                                <tr valign="top"><th scope="row"><?php _e( 'CTA Tangerine Ballons', 'metrostyle' ); ?></th>
-					<td>
-						<textarea id="sample_theme_options[cta3]" class="large-text" cols="50" rows="10" name="sample_theme_options[cta3]"><?php echo esc_textarea( $options['cta3'] ); ?></textarea>
-					</td>
-				</tr>
+                                
+                                
+                                
                                 
 			</table>
 

@@ -224,10 +224,27 @@ ul.unstyled, ol.unstyled {
     background-color: #1e8bc3;
     color: #ffffff;
     display: inline-block;
-    font-size: 13px !important;
+    //font-size: 13px !important;
     line-height: 26px;
     margin: 0 5px 8px 0;
     padding: 0 10px;
     transition: all 0.3s ease 0s;
     vertical-align: top;
+}
+
+#breadcrumbs{
+    list-style:none;
+    margin:10px 0;
+    overflow:hidden;
+}
+ 
+#breadcrumbs li{
+    float:left;
+    margin-right:15px;
+}
+ 
+#breadcrumbs .separator{
+    font-weight:700;
+    font-size:20px;
+    color:#999;
 }
