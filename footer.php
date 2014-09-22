@@ -55,38 +55,38 @@
                       <h4>Recent News</h4>
                       <div>
                           <ul style="list-style:none;margin:0; padding: 0;">
-                              <li>
-                                  <div class="fa fa-newspaper-o" style="border-color:#fff; color:#fff;border-style: solid; border-radius: 20px; border-width: 0px; height: 20px; width: 20px;line-height: 20px; display:inline-block; padding-left:3px; vertical-align: middle;">
-                                    
-                                  </div>
-                                  <a href="#" style="font-size:13px;margin-left:8px;color:#f86924;">Duis sed odio sit amet nibh vulputate.</a>
-                                  <span style="display:block; margin-left: 38px; font-size: 11px;"><i>Sept. 19, 2014 </i></span>
-                                  <span style="display:block; margin-left: 10px; font-size: 11px;">quis bibendum auctor, nisi elit consequat ipsum...</span>
-                              </li>
-                              <li>
-                                  <div class="fa fa-newspaper-o" style="border-color:#fff; color:#fff;border-style: solid; border-radius: 20px; border-width: 0px; height: 20px; width: 20px;line-height: 20px; display:inline-block; padding-left:3px; vertical-align: middle;">
-                                    
-                                  </div>
-                                  <a href="#" style="font-size:13px;margin-left:8px;color:#f86924;">Duis sed odio sit amet nibh vulputate.</a>
-                                  <span style="display:block; margin-left: 38px; font-size: 11px;"><i>Sept. 19, 2014 </i></span>
-                                  <span style="display:block; margin-left: 10px; font-size: 11px;">quis bibendum auctor, nisi elit consequat ipsum...</span>
-                              </li>
-                              <li>
-                                  <div class="fa fa-newspaper-o" style="border-color:#fff; color:#fff;border-style: solid; border-radius: 20px; border-width: 0px; height: 20px; width: 20px;line-height: 20px; display:inline-block; padding-left:3px; vertical-align: middle;">
-                                    
-                                  </div>
-                                  <a href="#" style="font-size:13px;margin-left:8px;color:#f86924;">Duis sed odio sit amet nibh vulputate.</a>
-                                  <span style="display:block; margin-left: 38px; font-size: 11px;"><i>Sept. 19, 2014 </i></span>
-                                  <span style="display:block; margin-left: 10px; font-size: 11px;">quis bibendum auctor, nisi elit consequat ipsum...</span>
-                              </li>
-                              <li>
-                                  <div class="fa fa-newspaper-o" style="border-color:#fff; color:#fff;border-style: solid; border-radius: 20px; border-width: 0px; height: 20px; width: 20px;line-height: 20px; display:inline-block; padding-left:3px; vertical-align: middle;">
-                                    
-                                  </div>
-                                  <a href="#" style="font-size:13px;margin-left:8px;color:#f86924;">Duis sed odio sit amet nibh vulputate.</a>
-                                  <span style="display:block; margin-left: 38px; font-size: 11px;"><i>Sept. 19, 2014 </i></span>
-                                  <span style="display:block; margin-left: 10px; font-size: 11px;">quis bibendum auctor, nisi elit consequat ipsum...</span>
-                              </li>
+                              <?php
+                                $args = array( 'posts_per_page' => 4, 'category_name' => 'News Articles' );
+
+                                $myposts = get_posts( $args );
+                                $counter=0;
+                                foreach ( $myposts as $post ) : setup_postdata( $post );
+                                $title = $post->post_title;
+                                if(strlen($title) > 35)
+                                {
+                                    $title = substr($title,0,34).' ...';
+                                }
+                                
+                                $date = date('M d,Y',strtotime($post->post_modified));
+                                $id = get_the_ID();
+                                $excerpt = $post->post_excerpt;
+                                if(strlen($excerpt) > 35)
+                                {
+                                    $excerpt = substr($excerpt,0,34) . '...';
+                                }
+                                    ?>
+                                        <li>
+                                            <div class="fa fa-newspaper-o" style="border-color:#fff; color:#fff;border-style: solid; border-radius: 20px; border-width: 0px; height: 20px; width: 20px;line-height: 20px; display:inline-block; padding-left:3px; vertical-align: middle;">
+
+                                            </div>
+                                            <a href="<?php echo $post->guid;?>" style="font-size:13px;margin-left:8px;color:#f86924;"><?php echo $title;?></a>
+                                            <span style="display:block; margin-left: 38px; font-size: 11px;"><i><?php echo $date?></i></span>
+                                            <span style="display:block; margin-left: 10px; font-size: 11px;"><?php echo $excerpt; ?></span>
+                                        </li>
+                                    <?php
+                                    $counter = $counter + 1;
+                                endforeach; 
+                                wp_reset_postdata();?>
                           </ul>
                       </div>
                   </div>
@@ -95,7 +95,7 @@
                       <div>
                           <ul style="list-style: none; margin:0; padding: 0;">
                           <?php
-                            $args = array( 'posts_per_page' => 4, 'category' => 8 );
+                            $args = array( 'posts_per_page' => 4, 'category_name' => 'Reviews and Whitepapers' );
 
                             $myposts = get_posts( $args );
                             foreach ( $myposts as $post ) : setup_postdata( $post );
@@ -120,8 +120,17 @@
           </div>
           <div style="background-color: #282f33;">
               <div class="container">
+                  <style>
+                      #footerMenu li
+                      {
+                          display:inline;
+                      }
+                  </style>
                   <div class="row">
-                      <span style="color:#fff; font-size:11px; display:block; margin-top:8px; margin-bottom: 8px;">Perplexsys Systems &copy; 2014 | <a href="#">Privacy Policy</a></span>
+                      <span style="color:#fff; font-size:11px; display:block; margin-top:8px; margin-bottom: 8px;">Perplexsys Systems &copy; 2014 | 
+                      
+                          <?php wp_nav_menu(array('theme_location' => 'footer-menu', 'link_after' => ' &bullet; ','container'=>false, 'items_wrap' => '<ul id="footerMenu" style="list-style: none; margin: 0; padding: 0; display:inline-block;">%3$s</ul>'));?>
+                      </span>
                   </div>
               </div>
               

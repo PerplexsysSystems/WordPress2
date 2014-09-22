@@ -69,7 +69,7 @@
           <div class="row" style="margin-top:20px;">
           <!--slider-->
           <?php
-        $args = array('category' => 9 );
+        $args = array('category_name' => 'Sliders' );
 
                             $myposts = get_posts( $args );
                             $maxcounter=0;
@@ -141,26 +141,6 @@ case $prev_counter:
 EOF;
                             endforeach; 
                             wp_reset_postdata();?>
-<!--              <div id="slide1img" class="pull-left" style="height:420px; background-color: #fff;">
-                  <img src="<?php echo get_template_directory_uri(); ?>/images/<?php echo $options['slide1img'];?>"/>
-              </div>
-              <div id="slide1info" class="pull-right" style="width: 370px; height: 420px; padding-top: 51px; padding-left:31px; padding-right: 30px; background-color: white;">
-                <?php echo $options['slide1content'];?>                 
-              </div>
-          
-              <div id="slide2img" class="pull-left" style="height:420px; background-color: #fff; display: none;">
-                  <img src="<?php echo get_template_directory_uri(); ?>/images/<?php echo $options['slide2img'];?>"/>
-              </div>
-              <div id="slide2info" class="pull-right" style="width: 370px; height: 420px; padding-top: 51px; padding-left:31px; padding-right: 30px; background-color: white; display: none;">
-                <?php echo $options['slide2content'];?>
-              </div>
-          
-              <div id="slide3img" class="pull-left" style="height:420px; background-color: #fff; display: none;">
-                  <img src="<?php echo get_template_directory_uri(); ?>/images/<?php echo $options['slide3img'];?>"/>
-              </div>
-              <div id="slide3info" class="pull-right" style="width: 370px; height: 420px; padding-top: 51px; padding-left:31px; padding-right: 30px; background-color: white; display: none;">
-                <?php echo $options['slide3content'];?>
-              </div>-->
             <script>
                 $slideID=0;
                 function NextSlide()
@@ -168,22 +148,9 @@ EOF;
                     switch($slideID)
                     {
                         <?php echo $scripts;?>
-//                        case 1:
-//                            $('#slide1img').fadeOut(600, function(){$('#slide2img').fadeIn();});        
-//                            $('#slide1info').fadeOut(900, function(){$('#slide2info').fadeIn();});
-//                            
-//                            $slideID=2;
-//                            break;
-//                       case 2:
-//                            $('#slide2img').fadeOut(600, function(){$('#slide3img').fadeIn();});        
-//                            $('#slide2info').fadeOut(900, function(){$('#slide3info').fadeIn();});
-//                            $slideID=3;
-//                            break;
-//                       case 3:
-//                            $('#slide3img').fadeOut(600, function(){$('#slide1img').fadeIn();});        
-//                            $('#slide3info').fadeOut(900, function(){$('#slide1info').fadeIn();});
-//                            $slideID=1;
-//                            break;
+                        case default
+
+                              break;
                     }
                 }
                 
@@ -194,7 +161,7 @@ EOF;
         </div>
     <div class="row" style="margin-top: 20px; color:#fff;">
         <?php
-        $args = array( 'order' => 'ASC', 'posts_per_page' => 3, 'category' => 7 );
+        $args = array( 'order' => 'ASC', 'posts_per_page' => 3, 'category_name' => 'Call To Action' );
 
                             $myposts = get_posts( $args );
                             $counter=0;
@@ -230,115 +197,110 @@ EOF;
           
           </div>
     
-          <div class="row" style="margin-top:20px; background-color: #fff;">
-              <div class="contentbox" style="background-color: #fff; padding:16px 30px 32px;">
-                    <h2 style="font-weight: 300; margin-bottom: 20px;">Latest Projects</h2>
-                    <ul id="projectlist" style="list-style: none; margin:0px; padding: 0px;">
+          
                         <?php
-                            $args = array( 'posts_per_page' => 4, 'category' => 3 );
+                            $args = array( 'posts_per_page' => 4, 'category_name' => 'Projects' );
 
                             $myposts = get_posts( $args );
-                            foreach ( $myposts as $post ) : setup_postdata( $post );
-                            $title = $post->post_title;
-                            if(strlen($title) > 25)
+                            if($myposts)
                             {
-                                $title = substr($title,0,25).' ...';
-                            }
-                            $date = date('M d,Y',strtotime($post->post_modified));
-                            $excerpt = $post->post_excerpt;
                                 ?>
-                                    <li style="float:left;">                            
-                                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                                                <div class="flipper">
-                                                        <div class="front">
-                                                            <h5><?php echo $title;?></h5>
-                                                            <figure class="featured-thumbnail thumbnail">
-                                                                <?php
-                                                                    if(has_post_thumbnail())
-                                                                    {
-                                                                        the_post_thumbnail();
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        ?>
-                                                                        <img src="<?php echo get_template_directory_uri(); ?>/images/no_image.jpg" alt="Image Format">    
-                                                                        <?php
-                                                                    }
-                                                                ?>
-                                                            </figure>
-                                                        </div>
-                                                    <div class="back">
-                                                        <div class="inner">
-                                                            <h5><?php echo $title;?></h5>
-                                                            <div class="post_meta">
-                                                                <span class="post_date">
-                                                                    <time datetime="<?php echo $date;?>"><?php echo $date;?></time>
-                                                                </span>
-                                                            </div>
-                                                            <p class="excerpt"><?php echo $excerpt;?></p><a href="<?php echo $post->guid;?>" class="btn btn-primary" title="Image Format">read more</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        </div>
-                                    </li>
+                                    <div class="row" style="margin-top:20px; background-color: #fff;">
+                                        <div class="contentbox" style="background-color: #fff; padding:16px 30px 32px;">
+                                              <h2 style="font-weight: 300; margin-bottom: 20px;">Latest Projects</h2>
+                                              <ul id="projectlist" style="list-style: none; margin:0px; padding: 0px;">
                                 <?php
-                            endforeach; 
-                            wp_reset_postdata();
+                                
+                                foreach ( $myposts as $post ) : setup_postdata( $post );
+                                    $title = $post->post_title;
+                                    if(strlen($title) > 25)
+                                    {
+                                        $title = substr($title,0,25).' ...';
+                                    }
+                                    $date = date('M d,Y',strtotime($post->post_modified));
+                                    $excerpt = $post->post_excerpt;
+                                        ?>
+                                            <li style="float:left;">                            
+                                                <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+                                                        <div class="flipper">
+                                                                <div class="front">
+                                                                    <h5><?php echo $title;?></h5>
+                                                                    <figure class="featured-thumbnail thumbnail">
+                                                                        <?php
+                                                                            if(has_post_thumbnail())
+                                                                            {
+                                                                                the_post_thumbnail();
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                ?>
+                                                                                <img src="<?php echo get_template_directory_uri(); ?>/images/no_image.jpg" alt="Image Format">    
+                                                                                <?php
+                                                                            }
+                                                                        ?>
+                                                                    </figure>
+                                                                </div>
+                                                            <div class="back">
+                                                                <div class="inner">
+                                                                    <h5><?php echo $title;?></h5>
+                                                                    <div class="post_meta">
+                                                                        <span class="post_date">
+                                                                            <time datetime="<?php echo $date;?>"><?php echo $date;?></time>
+                                                                        </span>
+                                                                    </div>
+                                                                    <p class="excerpt"><?php echo $excerpt;?></p><a href="<?php echo $post->guid;?>" class="btn btn-primary" title="Image Format">read more</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </li>
+                                        <?php
+                                    endforeach; 
+                                    wp_reset_postdata();
+                                    ?>
+                                        </ul>
+                                    </div>
+                                        </div>
+                                    <?php
+                            }
+                            else
+                            {
+                                
+                            }
+                            
                         ?>
-                    </ul>
-              </div>
               
-          </div>
+          
           <div class="row" style="margin-top:20px;">
-              <div style="background-image:url(<?php echo get_template_directory_uri(); ?>/images/img.jpg)" class="content_box alt">
-                <h2>Professional Management Skills</h2>
-                <ul class="recent-posts skills unstyled">
-                    <li class="recent-posts_li green fa fa-cloud-download">
-                        <h5 style="font-size: 20px; font-weight: 400;">
-                            <a title="Lorem ipsum dolor sit" href="http://livedemo00.template-help.com/wordpress_44910/skills-view/lorem-ipsum-dolor-sit/">Lorem ipsum dolor sit</a>
-                        </h5>
-                        <div class="excerpt">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae dui ligula.
-                        </div>
-                        <div class="clear">
-                            
-                        </div>
-                    </li> 
-                    <li class="recent-posts_li blue fa fa-flask">
-                        <h5 style="font-size: 20px; font-weight: 400;">
-                            <a title="Etiam eget porttitor enim" href="http://livedemo00.template-help.com/wordpress_44910/skills-view/etiam-eget-porttitor-enim/">Etiam eget porttitor enim</a>
-                        </h5>
-                        <div class="excerpt">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae dui ligula.
-                        </div>
-                        <div class="clear">
-                            
-                        </div>
-                    </li> 
-                    <li class="recent-posts_li red fa fa-flag-o">
-                        <h5 style="font-size: 20px; font-weight: 400;">
-                            <a title="Fusce egestas ultricies" href="http://livedemo00.template-help.com/wordpress_44910/skills-view/fusce-egestas-ultricies/">Fusce egestas ultricies</a>
-                        </h5>
-                        <div class="excerpt">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae dui ligula.
-                        </div>
-                        <div class="clear">
-                            
-                        </div>
-                    </li> 
-                    <li class="recent-posts_li orange nomargin fa fa-lightbulb-o">
-                        <h5 style="font-size: 20px; font-weight: 400;">
-                            <a title="Donec convallis arcu id lectus" href="http://livedemo00.template-help.com/wordpress_44910/skills-view/donec-convallis-arcu-id-lectus/">Donec convallis arcu id lectus</a>
-                        </h5>
-                        <div class="excerpt">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae dui ligula.
-                        </div>
-                        <div class="clear">
-                            
-                        </div>
-                    </li> 
-                </ul> 
-              </div>
+              <?php
+                                $args = array( 'posts_per_page' => 1, 'category_name' => 'Bottom Row' );
+
+                                $myposts = get_posts( $args );
+                                $counter=0;
+                                foreach ( $myposts as $post ) : setup_postdata( $post );
+                                $title = $post->post_title;
+                                if(strlen($title) > 35)
+                                {
+                                    $title = substr($title,0,34).' ...';
+                                }
+                                $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+                                $date = date('M d,Y',strtotime($post->post_modified));
+                                $id = get_the_ID();
+                                $excerpt = $post->post_excerpt;
+                                if(strlen($excerpt) > 35)
+                                {
+                                    $excerpt = substr($excerpt,0,34) . '...';
+                                }
+                                    ?>
+                                        <div style="background-image:url(<?php echo $image[0];?>)" class="content_box alt">
+                                            <h2><?php echo $title;?></h2>
+                                            <?php the_content();?>
+                                        </div>
+                                    <?php
+                                    $counter = $counter + 1;
+                                endforeach; 
+                                wp_reset_postdata();?>
+              
           </div>
           
       </div>

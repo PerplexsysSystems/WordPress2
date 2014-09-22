@@ -92,7 +92,7 @@
                           }
                       </style>
                       <div class="thumbnail">
-                      <div class="pull-left">
+                      <div class="pull-left thumbnail">
                           <?php
                           if(has_post_thumbnail())
                             {
@@ -101,12 +101,13 @@
                             else
                             {
                                 ?>
-                                <img style="height: 150px;" src="<?php echo get_template_directory_uri(); ?>/images/no_image.jpg">    
+                                <img class="attachment-thumbnail wp-post-image" style="height: 150px;" src="<?php echo get_template_directory_uri(); ?>/images/no_image.jpg">    
                                 <?php
                             }
                           ?>
                       </div>
-                      <div style="min-height:132px; padding-left: 185px;">
+                      <div style="min-height:151px; padding-left: 185px;">
+                          <h6><?php the_time('l j F Y');?></h6>
                           <h3><?php the_title();?></h3>
                           <p><?php the_excerpt();?></p>
                           <a href="#" class="btn btn-success pull-right"><span class="fa fa-arrow-right" style="display:inline-block; margin-right: 10px;"></span>Read More</a>

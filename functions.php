@@ -4,6 +4,7 @@ require_once ( get_template_directory() . '/theme-options.php' );
 //Register Menus
 function register_my_menu() {
   register_nav_menu('header-menu',__( 'Header Menu' ));
+  register_nav_menu('footer-menu',__( 'Footer Menu' ));
 }
 add_action( 'init', 'register_my_menu' );
 
@@ -78,4 +79,33 @@ function the_breadcrumb() {
     elseif (is_search()) {echo"<li>Search Results"; echo'</li>';}
     echo '</ul>';
 }
+
+//Create categories on theme activation
+function create_my_cat () {
+    if (file_exists (ABSPATH.'/wp-admin/includes/taxonomy.php')) {
+        require_once (ABSPATH.'/wp-admin/includes/taxonomy.php'); 
+        if ( ! get_cat_ID( 'News Articles' ) ) {
+            wp_create_category( 'News Article' );
+        }
+        if ( ! get_cat_ID( 'Call To Action' ) ) {
+            wp_create_category( 'Call To Action' );
+        }
+        if ( ! get_cat_ID( 'Latest Projects' ) ) {
+            wp_create_category( 'Latest Projects' );
+        }
+        if ( ! get_cat_ID( 'Sliders' ) ) {
+            wp_create_category( 'Sliders' );
+        }
+        if ( ! get_cat_ID( 'Reviews and Whitepapers' ) ) {
+            wp_create_category( 'Reviews and Whitepapers' );
+        }
+        if ( ! get_cat_ID( 'Bottom Row' ) ) {
+            wp_create_category( 'Bottom Row' );
+        }
+        if ( ! get_cat_ID( 'Blog' ) ) {
+            wp_create_category( 'Blog' );
+        }
+    }
+}
+add_action ( 'after_setup_theme', 'create_my_cat' );
 ?>

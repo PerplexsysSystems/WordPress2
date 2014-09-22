@@ -68,19 +68,61 @@
           </div>
           <div class="row" style="margin-top:20px; margin-bottom: 20px; background-color: #fff;">
               <div class="contentbox" style="background-color: #fff; padding:16px 30px 32px;">
-                    <?php
-                    
-                    if (have_posts()) :
-                        while (have_posts()) :
-                            the_post();
-                    ?>
-                  <h3><?php the_title();?></h3>
-                  <?php the_content();?>
-                    <?php
-                        endwhile;
-                    endif;
-                    
-                    ?>
+                  <style>
+                      .attachment-50x50{
+                          width:50px;
+                      }
+                  </style>
+                  <ul style="list-style: none;">
+                      <?php
+                        $args = array( 'category_name' => 'Blog' );
+
+                        $myposts = get_posts( $args );
+                        $counter=0;
+                        foreach ( $myposts as $post ) : setup_postdata( $post );
+                        $title = $post->post_title;
+                        if(strlen($title) > 23)
+                        {
+                            $title = substr($title,0,19).' ...';
+                        }
+                        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+                        $date = date('M d,Y',strtotime($post->post_modified));
+                        $id = get_the_ID();
+                        $excerpt = $post->post_excerpt;
+                        if(strlen($excerpt) > 40)
+                        {
+                            $excerpt = substr($excerpt,0,37) . '...';
+                        }
+                            ?>
+                      <li style="display:inline-block; margin-left: 20px; float:left;">
+                      <div class="thumbnail" style="max-width: 330px; min-height: 200px;">
+                      <div class="pull-left thumbnail">
+                          <?php
+                          if(has_post_thumbnail())
+                            {
+                                the_post_thumbnail('50x50');
+                            }
+                            else
+                            {
+                                ?>
+                                <img class="attachment-thumbnail wp-post-image" style="width: 50px;" src="<?php echo get_template_directory_uri(); ?>/images/no_image.jpg">    
+                                <?php
+                            }
+                          ?>
+                      </div>
+                      <div style="min-height:151px; padding-left: 70px;">
+                          <h6><?php the_time('l j F Y');?></h6>
+                          <h3><?php echo $title;?></h3>
+                          <p><?php the_excerpt();?></p>
+                          <a href="#" class="btn btn-success"><span class="fa fa-arrow-right" style="display:inline-block; margin-right: 10px;"></span>Read More</a>
+                      </div>
+                  </div>
+                      </li>
+                            <?php
+                            $counter = $counter + 1;
+                        endforeach; 
+                        wp_reset_postdata();?>
+                  </ul>
               </div>
           </div>
       </div>

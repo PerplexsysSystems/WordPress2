@@ -66,21 +66,67 @@
                   </nav>
               </div>
           </div>
+    <div class="row" style="margin-top:20px; margin-bottom: 20px; background-color: #fff;">
+              <div class="contentbox" style="background-color: #fff; padding:16px 30px 32px;">
+                  <h3>Projects Directory</h3>
+              </div>
+          </div>
           <div class="row" style="margin-top:20px; margin-bottom: 20px; background-color: #fff;">
               <div class="contentbox" style="background-color: #fff; padding:16px 30px 32px;">
                     <?php
-                    
-                    if (have_posts()) :
-                        while (have_posts()) :
-                            the_post();
-                    ?>
-                  <h3><?php the_title();?></h3>
-                  <?php the_content();?>
-                    <?php
-                        endwhile;
-                    endif;
-                    
-                    ?>
+                        $args = array( 'posts_per_page' => 1, 'category_name' => 'Projects' );
+
+                        $myposts = get_posts( $args );
+                        $counter=0;
+                        foreach ( $myposts as $post ) : setup_postdata( $post );
+                        $title = $post->post_title;
+                        if(strlen($title) > 35)
+                        {
+                            $title = substr($title,0,34).' ...';
+                        }
+                        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+                        $date = date('M d,Y',strtotime($post->post_modified));
+                        $id = get_the_ID();
+                        $excerpt = $post->post_excerpt;
+                        if(strlen($excerpt) > 35)
+                        {
+                            $excerpt = substr($excerpt,0,34) . '...';
+                        }
+                            ?>
+                                <div class="row">
+                      <style>
+                          .categoryBox
+                          {
+                              
+                          }
+                      </style>
+                      <div class="thumbnail">
+                      <div class="pull-left thumbnail">
+                          <?php
+                          if(has_post_thumbnail())
+                            {
+                                the_post_thumbnail('thumbnail');
+                            }
+                            else
+                            {
+                                ?>
+                                <img class="attachment-thumbnail wp-post-image" style="height: 150px;" src="<?php echo get_template_directory_uri(); ?>/images/no_image.jpg">    
+                                <?php
+                            }
+                          ?>
+                      </div>
+                      <div style="min-height:151px; padding-left: 185px;">
+                          <h6><?php the_time('l j F Y');?></h6>
+                          <h3><?php the_title();?></h3>
+                          <p><?php the_excerpt();?></p>
+                          <a href="#" class="btn btn-success pull-right"><span class="fa fa-arrow-right" style="display:inline-block; margin-right: 10px;"></span>Read More</a>
+                      </div>
+                  </div>
+                  </div>
+                            <?php
+                            $counter = $counter + 1;
+                        endforeach; 
+                        wp_reset_postdata();?>
               </div>
           </div>
       </div>
